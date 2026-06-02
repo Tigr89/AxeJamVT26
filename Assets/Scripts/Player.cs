@@ -1,0 +1,42 @@
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Player : MonoBehaviour
+{
+    [SerializeField] Transform target;
+    [SerializeField] Pathfinder pathfinder;
+    [SerializeField] float speed = 3f;
+
+    List<Vector2> path;
+    int pathIndex;
+    Vector2 lastTargetPos;
+
+    void Start() => RecalculatePath();
+
+    void Update()
+    {
+        if (target == null || pathfinder == null) return;
+
+        if (Vector2.Distance((Vector2)target.position, lastTargetPos) > 0.5f)
+            RecalculatePath();
+
+        FollowPath();
+    }
+
+    void RecalculatePath()
+    {
+        lastTargetPos = target.position;
+        path = pathfinder.FindPath(transform.position, target.position);
+        pathIndex = 0;
+    }
+
+    void FollowPath()
+    {
+        if (path == null || pathIndex >= path.Count) return;
+
+        transform.position = Vector2.MoveTowards(transform.position, path[pathIndex], speed * Time.deltaTime);
+
+        if (Vector2.Distance(transform.position, path[pathIndex]) < 0.05f)
+            pathIndex++;
+    }
+}
