@@ -5,6 +5,7 @@ public class Pathfinder : MonoBehaviour
 {
     [SerializeField] float cellSize = 1f;
     [SerializeField] LayerMask obstacleLayer;
+    [SerializeField] int maxNodes = 500;
 
     class Node
     {
@@ -29,8 +30,11 @@ public class Pathfinder : MonoBehaviour
         open.Add(startNode);
         nodeMap[start] = startNode;
 
+        int iterations = 0;
         while (open.Count > 0)
         {
+            if (++iterations > maxNodes) return null;
+
             Node current = open[0];
             for (int i = 1; i < open.Count; i++)
                 if (open[i].FCost < current.FCost) current = open[i];

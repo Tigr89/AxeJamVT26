@@ -1,18 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class EnemyPatrol : MonoBehaviour
 {
     [SerializeField] Pathfinder pathfinder;
-    [SerializeField] Tilemap groundTilemap;
-    [SerializeField] LayerMask obstacleLayer;
+    [SerializeField] Transform[] waypoints;
     [SerializeField] float speed = 2f;
     [SerializeField] float waitTime = 5f;
 
     List<Vector2> path;
     int pathIndex;
+    int lastWaypointIndex = -1;
 
     void Start()
     {
@@ -28,7 +27,7 @@ public class EnemyPatrol : MonoBehaviour
     {
         while (true)
         {
-            Vector2 destination = GetRandomWalkablePosition();
+            Vector2 destination = PickRandomWaypoint();
             path = pathfinder.FindPath(transform.position, destination);
             pathIndex = 0;
 
@@ -49,24 +48,15 @@ public class EnemyPatrol : MonoBehaviour
             pathIndex++;
     }
 
-    Vector2 GetRandomWalkablePosition()
+    Vector2 PickRandomWaypoint()
     {
-        BoundsInt bounds = groundTilemap.cellBounds;
+        if (waypoints.Length == 1) return waypoints[0].position;
 
-        for (int i = 0; i < 50; i++)
-        {
-            int x = Random.Range(bounds.xMin, bounds.xMax);
-            int y = Random.Range(bounds.yMin, bounds.yMax);
-            Vector3Int cellPos = new Vector3Int(x, y, 0);
+        int index;
+        do { index = Random.Range(0, waypoints.Length); }
+        while (index == lastWaypointIndex);
 
-            if (!groundTilemap.HasTile(cellPos)) continue;
-
-            Vector2 worldPos = groundTilemap.GetCellCenterWorld(cellPos);
-
-            if (!Physics2D.OverlapBox(worldPos, Vector2.one * 0.9f, 0f, obstacleLayer))
-                return worldPos;
-        }
-
-        return transform.position;
+        lastWaypointIndex = index;
+        return waypoints[index].position;
     }
 }
