@@ -5,13 +5,25 @@ using UnityEngine;
 public class EnemyPatrol : MonoBehaviour
 {
     [SerializeField] Pathfinder pathfinder;
-    [SerializeField] Transform[] waypoints;
+    [SerializeField] Transform patrolPoints;
     [SerializeField] float speed = 2f;
     [SerializeField] float waitTime = 5f;
 
+    Transform[] waypoints;
     List<Vector2> path;
     int pathIndex;
     int lastWaypointIndex = -1;
+
+    void Awake()
+    {
+        if (patrolPoints == null)
+            patrolPoints = GameObject.Find("PatrolPoints").transform;
+
+        int count = patrolPoints.childCount;
+        waypoints = new Transform[count];
+        for (int i = 0; i < count; i++)
+            waypoints[i] = patrolPoints.GetChild(i);
+    }
 
     void Start()
     {
