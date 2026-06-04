@@ -23,6 +23,8 @@ public class CombatScript : MonoBehaviour
     //UI ELEMENTS
     [SerializeField] private TMP_Text playerText;
     [SerializeField] private TMP_Text enemyText;
+    private TMP_Text playerHPText;
+    private TMP_Text enemyHPText;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -30,11 +32,18 @@ public class CombatScript : MonoBehaviour
         if (main == null) main = this;
         else Destroy(gameObject);
         combatContainer.SetActive(false);
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (inCombat)
+        {
+            if (playerHPText != null) playerHPText.text = PlayerStats.main.playerHealth.ToString();
+            if (enemyHPText != null && attackTarget != null) enemyHPText.text = attackTarget.GetComponent<EnemyStats>().enemyHealth.ToString();
+        }
+
         //DEBUG
         if (!diceRolling && Input.GetKeyDown(KeyCode.V)) StartCoroutine(CombatDice());
 
@@ -54,9 +63,9 @@ public class CombatScript : MonoBehaviour
 
         while (diceRolling)
         {
-            yield return new WaitForSeconds(diceSpeed);
             diceNumber = Random.Range(0, diceSprites.Length);
             diceSR.sprite = diceSprites[diceNumber];
+            yield return new WaitForSeconds(diceSpeed);
         }
 
       
@@ -68,9 +77,14 @@ public class CombatScript : MonoBehaviour
         inCombat = true;
         combatContainer.SetActive(true);
 
+        playerHPText = GameObject.Find("PHp").GetComponent<TMP_Text>();
+        enemyHPText = GameObject.Find("EHp").GetComponent<TMP_Text>();
+
+        EnemyStats enemyStats = attackTarget.GetComponent<EnemyStats>();
+        enemyStats.ScaleToPlayer();
+
         while(attackTarget != null)
         {
-            EnemyStats enemyStats = attackTarget.GetComponent<EnemyStats>();
             if (playerText != null) playerText.text = "Waiting...";
             if (enemyText != null) enemyText.text = "Waiting...";
 

@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
 
         lastTargetPos = target.position;
         path = pathfinder.FindPath(transform.position, target.position);
+        if (path != null) path.Add(target.position);
         pathIndex = 0;
     }
 
