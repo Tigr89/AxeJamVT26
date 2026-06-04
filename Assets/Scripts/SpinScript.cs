@@ -78,7 +78,11 @@ public class SpinScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.T)) RemoveIcon(0);
 
-        if (Input.GetKeyDown(KeyCode.Space)) StopSpin();
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (isSpinning) StopSpin();
+            else StartSpin();
+        }
     }
 
     public void RemoveIcon(int index)
@@ -97,6 +101,7 @@ public class SpinScript : MonoBehaviour
     {
         GameObject instance = Instantiate(iconPlaceholder, transform, false);
         instance.GetComponent<Image>().sprite = itemToAdd.GetComponent<SpriteRenderer>().sprite;
+        instance.GetComponent<ItemSymbol>().targetPosition = itemToAdd.transform;
         iconList.Add(instance);
         UpdateIconList();
     }
@@ -130,7 +135,9 @@ public class SpinScript : MonoBehaviour
 
     public void StartSpin()
     {
+        wheelOffset = 0; //Behövs nog inte men känns bättre eftersom detta värde annars blir väldigt stort.
         targetIcon = null;
+        isSpinning = true;
     }
 
     public void StopSpin()
