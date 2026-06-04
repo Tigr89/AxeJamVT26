@@ -105,15 +105,16 @@ public class SpinScript : MonoBehaviour
         UpdateIconList();
     }
 
-    public int AddIcon(GameObject itemToAdd)
+    public void AddIcon(GameObject itemToAdd)
     {
         GameObject instance = Instantiate(iconPlaceholder, transform, false);
         instance.GetComponent<Image>().sprite = itemToAdd.GetComponent<SpriteRenderer>().sprite;
         instance.GetComponent<ItemSymbol>().targetPosition = itemToAdd.transform;
+        instance.GetComponent<ItemSymbol>().objectID = itemToAdd.name;
         iconList.Add(instance);
         UpdateIconList();
 
-        return iconList.Count - 1;
+        
     }
 
     public void UpdateIconList()

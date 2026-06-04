@@ -4,6 +4,7 @@ public class ItemSymbol : MonoBehaviour
 {
     private Player player;
     public Transform targetPosition;
+    public string objectID;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
