@@ -60,7 +60,7 @@ public class SpinScript : MonoBehaviour
             {
                 if (targetIcon.GetComponent<RectTransform>().anchoredPosition.x <= 0)
                 {
-                    Debug.Log("Stop spin!");
+                    //Debug.Log("Stop spin!");
                 }
                 else
                 {
@@ -84,7 +84,7 @@ public class SpinScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R)) UpdateIconList();
 
-        if (Input.GetKeyDown(KeyCode.T)) RemoveIcon(0);
+        //if (Input.GetKeyDown(KeyCode.T)) RemoveIcon(0);
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -93,19 +93,23 @@ public class SpinScript : MonoBehaviour
         }
     }
     
-    public void RemoveIcon(int index)
+    public void RemoveIcon(string objectID)
     {
         //Kolla så att index ligger innanför listans längd. Om den gör det,
         //ta bort den ikonen.
-        if (index < iconList.Count)
+        for (int i = 0; i < iconList.Count; i++)
         {
-            Destroy(iconList[index]);
-            iconList.RemoveAt(index);
+           if (iconList[i].GetComponent<ItemSymbol>().objectID == objectID)
+            {
+                Destroy(iconList[i]);
+                iconList.RemoveAt(i);
+                break;
+            }
         }
         UpdateIconList();
     }
 
-    public void AddIcon(GameObject itemToAdd)
+    public string AddIcon(GameObject itemToAdd)
     {
         GameObject instance = Instantiate(iconPlaceholder, transform, false);
         instance.GetComponent<Image>().sprite = itemToAdd.GetComponent<SpriteRenderer>().sprite;
@@ -114,7 +118,8 @@ public class SpinScript : MonoBehaviour
         iconList.Add(instance);
         UpdateIconList();
 
-        
+        return instance.GetComponent<ItemSymbol>().objectID;
+
     }
 
     public void UpdateIconList()

@@ -3,7 +3,7 @@ using UnityEngine;
 public class Items : MonoBehaviour
 {
     [SerializeField] SpinScript spinScript;
-    private int index;
+    private string objectID;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -18,6 +18,14 @@ public class Items : MonoBehaviour
     private void Awake()
     {
         spinScript = GameObject.Find("SpinLogic").GetComponent<SpinScript>();
-        index = spinScript.AddIcon(gameObject); 
+        objectID = spinScript.AddIcon(gameObject); 
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            spinScript.RemoveIcon(objectID);
+            Destroy(gameObject);
+        }
     }
 }
