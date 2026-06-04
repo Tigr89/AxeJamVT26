@@ -47,4 +47,12 @@ public class Player : MonoBehaviour
         target = t_pos;
         RecalculatePath();
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.tag == "Enemy")
+        {
+            CombatScript.main.AddTarget(other.gameObject);
+        }
+    }
 }

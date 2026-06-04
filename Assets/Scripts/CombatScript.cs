@@ -38,11 +38,11 @@ public class CombatScript : MonoBehaviour
         //DEBUG
         if (!diceRolling && Input.GetKeyDown(KeyCode.V)) StartCoroutine(CombatDice());
 
-        if (startCombat)
+        /*if (startCombat)
         {
             StartCoroutine(Combat());
             startCombat = false;
-        }
+        }*/
 
 
     }
@@ -110,5 +110,11 @@ public class CombatScript : MonoBehaviour
         combatContainer.SetActive(false);
 
         yield return null;
+    }
+
+    public void AddTarget(GameObject target)
+    {
+        attackTarget = target;
+        StartCoroutine(Combat());
     }
 }
