@@ -17,6 +17,6 @@ public class Items : MonoBehaviour
     private void Awake()
     {
         spinScript = GameObject.Find("SpinLogic").GetComponent<SpinScript>();
-        spinScript.AddIcon(gameObject);
+        spinScript.AddIcon(gameObject); 
     }
 }

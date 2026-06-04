@@ -5,8 +5,9 @@ using UnityEngine.UI;
 public class SpinScript : MonoBehaviour
 {
     public List<GameObject> iconList;
+
     [SerializeField] int distanceBetweenIcons;
-    RectTransform rectTransform;
+    [SerializeField] RectTransform rectTransform;
     public GameObject targetIcon; //The one that is selected when players hit space
 
     public float wheelOffset;
@@ -19,10 +20,9 @@ public class SpinScript : MonoBehaviour
     [SerializeField] GameObject iconPlaceholder;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
-        if(gameObject.transform.childCount > 0) UpdateIconList();
 
         
     }
@@ -108,6 +108,7 @@ public class SpinScript : MonoBehaviour
 
     public void UpdateIconList()
     {
+        //if (gameObject.transform.childCount <= 1) return; //If there are no icons, don't do anything       
         //Empty the list before refilling it
         iconList.Clear();
 

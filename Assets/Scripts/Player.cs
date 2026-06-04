@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
 
     void RecalculatePath()
     {
+        if (target == null) return;
+
         lastTargetPos = target.position;
         path = pathfinder.FindPath(transform.position, target.position);
         pathIndex = 0;
