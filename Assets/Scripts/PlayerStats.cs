@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     public static PlayerStats main;
-    public int playerMaxHealth;
+    public int playerMaxHealth = 36;
     public int playerHealth;
     public int playerDamage;
     public int playerArmour;
@@ -29,5 +29,6 @@ public class PlayerStats : MonoBehaviour
         {
             Debug.Log("Game Over!");
         }
+        if (playerHealth > playerMaxHealth) playerHealth = playerMaxHealth;
     }
 }

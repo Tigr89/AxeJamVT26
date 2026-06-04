@@ -23,6 +23,7 @@ public class CombatScript : MonoBehaviour
     //UI ELEMENTS
     [SerializeField] private TMP_Text playerText;
     [SerializeField] private TMP_Text enemyText;
+    [SerializeField] private DisplayStats enemyInformationContainer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -55,6 +56,7 @@ public class CombatScript : MonoBehaviour
         while (diceRolling)
         {
             yield return new WaitForSeconds(diceSpeed);
+            if (!diceRolling) break; //Så att
             diceNumber = Random.Range(0, diceSprites.Length);
             diceSR.sprite = diceSprites[diceNumber];
         }
@@ -115,6 +117,7 @@ public class CombatScript : MonoBehaviour
     public void AddTarget(GameObject target)
     {
         attackTarget = target;
+        enemyInformationContainer.enemyInstance = target.GetComponent<EnemyStats>(); 
         StartCoroutine(Combat());
     }
 }

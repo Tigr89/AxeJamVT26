@@ -125,7 +125,7 @@ Canvas:
   m_GameObject: {fileID: 3433321061075796188}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -308,6 +308,7 @@ MonoBehaviour:
   targetIcon: {fileID: 0}
   wheelOffset: 0
   spinSpeed: 599
+  spinPercentageIncrease: 1
   isSpinning: 1
   iconPlaceholder: {fileID: 8658812015935141500, guid: dc150d35079699b4ab46262bfecebda0, type: 3}
 --- !u!1 &4462947804916055800

@@ -70,6 +70,13 @@ public class SpinScript : MonoBehaviour
                 }
                 else
                 {
+                    //Få fienden att stanna om den blir vald
+                    if (targetIcon.tag == "Enemy")
+                    {
+                        GameObject targetInstance = GameObject.Find(targetIcon.GetComponent<ItemSymbol>().objectID);
+                        if (targetInstance != null) targetInstance.GetComponent<EnemyPatrol>().wait = true;
+                    }
+
                     float totalLength = 0;
                     wheelOffset += spinSpeed * Time.deltaTime;
                     totalLength = iconList.Count * distanceBetweenIcons;
@@ -122,6 +129,7 @@ public class SpinScript : MonoBehaviour
         instance.GetComponent<Image>().sprite = itemToAdd.GetComponent<SpriteRenderer>().sprite;
         instance.GetComponent<ItemSymbol>().targetPosition = itemToAdd.transform;
         instance.GetComponent<ItemSymbol>().objectID = itemToAdd.name;
+        instance.tag = itemToAdd.tag;
         iconList.Add(instance);
         UpdateIconList();
 
@@ -156,6 +164,7 @@ public class SpinScript : MonoBehaviour
             iconList.Add(child.gameObject);
         }
 
+
         //Shuffle list
         for (int i = iconList.Count - 1; i > 0; i--)
         {
@@ -164,6 +173,8 @@ public class SpinScript : MonoBehaviour
             iconList[i] = iconList[randomIndex];
             iconList[randomIndex] = temp;
         }
+
+        
     }
 
     public void StartSpin()

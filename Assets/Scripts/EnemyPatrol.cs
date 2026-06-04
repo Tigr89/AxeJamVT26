@@ -9,7 +9,8 @@ public class EnemyPatrol : MonoBehaviour
     [SerializeField] float speed = 2f;
     [SerializeField] float waitTime = 5f;
     [SerializeField] SpinScript spinScript;
-    
+
+    public bool wait;
 
     Transform[] waypoints;
     List<Vector2> path;
@@ -38,7 +39,7 @@ public class EnemyPatrol : MonoBehaviour
     void Update()
     {
         if (CombatScript.main.inCombat != false) return;
-        FollowPath();
+        if (!wait) FollowPath();
     }
 
     IEnumerator PatrolRoutine()
