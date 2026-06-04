@@ -30,6 +30,14 @@ public class SpinScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!CombatScript.main.inCombat)
+        {
+            SpinLogic();
+        }
+    }
+
+    private void SpinLogic()
+    {
         if (isSpinning)
         {
             float totalLength = 0;
@@ -48,9 +56,9 @@ public class SpinScript : MonoBehaviour
         }
         else
         {
-            if(targetIcon != null)
+            if (targetIcon != null)
             {
-                if(targetIcon.GetComponent<RectTransform>().anchoredPosition.x <= 0)
+                if (targetIcon.GetComponent<RectTransform>().anchoredPosition.x <= 0)
                 {
                     Debug.Log("Stop spin!");
                 }
@@ -70,7 +78,7 @@ public class SpinScript : MonoBehaviour
                         iconList[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(x, 0);
                     }
                 }
-               
+
             }
         }
 
@@ -84,7 +92,7 @@ public class SpinScript : MonoBehaviour
             else StartSpin();
         }
     }
-
+    
     public void RemoveIcon(int index)
     {
         //Kolla så att index ligger innanför listans längd. Om den gör det,
