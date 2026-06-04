@@ -39,4 +39,9 @@ public class Player : MonoBehaviour
         if (Vector2.Distance(transform.position, path[pathIndex]) < 0.05f)
             pathIndex++;
     }
+    public void NewTarget(Transform t_pos)
+    {
+        target = t_pos;
+        RecalculatePath();
+    }
 }

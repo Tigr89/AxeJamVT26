@@ -20,8 +20,12 @@ public class ItemSymbol : MonoBehaviour
     public void ExecuteAction()
     {
         //Debug.Log("Symbol " + gameObject.name + " activated!");
-        
-        //Ge player.NewTarget(targetPosition);.
+        if (targetPosition != null)
+        {
+
+            player.NewTarget(targetPosition);
+
+        }
 
         
     }
