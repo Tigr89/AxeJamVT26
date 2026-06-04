@@ -36,7 +36,7 @@ public class PlayerStats : MonoBehaviour
     public void LevelUp()
     {
         playerLevel++;
+        playerDamage++;
         Debug.Log("Level up! Nu är spelaren level " + playerLevel);
-        // TODO: lägg till level-up effekter här
     }
 }

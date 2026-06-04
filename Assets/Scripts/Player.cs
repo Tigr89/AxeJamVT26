@@ -33,6 +33,8 @@ public class Player : MonoBehaviour
         pathIndex = 0;
     }
 
+    public bool ReachedTarget => target == null || path == null || pathIndex >= path.Count;
+
     void FollowPath()
     {
         if (CombatScript.main.inCombat != false) return;
