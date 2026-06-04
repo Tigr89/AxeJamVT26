@@ -95,12 +95,13 @@ public class SpinScript : MonoBehaviour
     
     public void RemoveIcon(string objectID)
     {
-        //Kolla så att index ligger innanför listans längd. Om den gör det,
+        //Kolla sï¿½ att index ligger innanfï¿½r listans lï¿½ngd. Om den gï¿½r det,
         //ta bort den ikonen.
         for (int i = 0; i < iconList.Count; i++)
         {
            if (iconList[i].GetComponent<ItemSymbol>().objectID == objectID)
             {
+                iconList[i].transform.SetParent(null);
                 Destroy(iconList[i]);
                 iconList.RemoveAt(i);
                 break;
@@ -152,7 +153,7 @@ public class SpinScript : MonoBehaviour
 
     public void StartSpin()
     {
-        wheelOffset = 0; //Behövs nog inte men känns bättre eftersom detta värde annars blir väldigt stort.
+        wheelOffset = 0; //Behï¿½vs nog inte men kï¿½nns bï¿½ttre eftersom detta vï¿½rde annars blir vï¿½ldigt stort.
         targetIcon = null;
         isSpinning = true;
     }
@@ -178,7 +179,7 @@ public class SpinScript : MonoBehaviour
 
     public void ActivateChosenItem()
     {
-        //KOD som körs när man stannat!
+        //KOD som kï¿½rs nï¿½r man stannat!
         if (targetIcon != null) targetIcon.GetComponent<ItemSymbol>().ExecuteAction();
     }
 }

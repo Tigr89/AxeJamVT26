@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Items : MonoBehaviour
+public class ItemsWeap : MonoBehaviour
 {
     [SerializeField] SpinScript spinScript;
     private string objectID;
@@ -25,6 +25,7 @@ public class Items : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             spinScript.RemoveIcon(objectID);
+            collision.gameObject.GetComponent<PlayerStats>().playerDamage += 1;
             Destroy(gameObject);
         }
     }
