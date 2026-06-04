@@ -22,7 +22,7 @@ public class SpinScript : MonoBehaviour
     void Start()
     {
         rectTransform = GetComponent<RectTransform>();
-        UpdateIconList();
+        if(gameObject.transform.childCount > 0) UpdateIconList();
 
         
     }
