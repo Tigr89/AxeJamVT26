@@ -9,6 +9,7 @@ public class EnemyPatrol : MonoBehaviour
     [SerializeField] float speed = 2f;
     [SerializeField] float waitTime = 5f;
     [SerializeField] SpinScript spinScript;
+    private string ObjectID;
 
     Transform[] waypoints;
     List<Vector2> path;
@@ -18,7 +19,7 @@ public class EnemyPatrol : MonoBehaviour
     void Awake()
     {
         spinScript = GameObject.Find("SpinLogic").GetComponent<SpinScript>();
-        spinScript.AddIcon(gameObject);
+        ObjectID = spinScript.AddIcon(gameObject);
         if (patrolPoints == null)
             patrolPoints = GameObject.Find("PatrolPoints").transform;
 
