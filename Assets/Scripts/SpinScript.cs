@@ -13,10 +13,12 @@ public class SpinScript : MonoBehaviour
 
     public float wheelOffset;
     public float spinSpeed;
+    public float spinPercentageIncrease = 1;
 
     public bool isSpinning;
 
     private float startPos;
+
 
     [SerializeField] GameObject iconPlaceholder;
 
@@ -153,6 +155,15 @@ public class SpinScript : MonoBehaviour
             addedDistance = new Vector2(addedDistance.x + distanceBetweenIcons, addedDistance.y);
             iconList.Add(child.gameObject);
         }
+
+        //Shuffle list
+        for (int i = iconList.Count - 1; i > 0; i--)
+        {
+            int randomIndex = Random.Range(0, i + 1);
+            GameObject temp = iconList[i];
+            iconList[i] = iconList[randomIndex];
+            iconList[randomIndex] = temp;
+        }
     }
 
     public void StartSpin()
@@ -160,6 +171,7 @@ public class SpinScript : MonoBehaviour
         wheelOffset = 0; //Beh�vs nog inte men k�nns b�ttre eftersom detta v�rde annars blir v�ldigt stort.
         targetIcon = null;
         isSpinning = true;
+        spinSpeed = spinSpeed * spinPercentageIncrease;
     }
 
     public void StopSpin()
