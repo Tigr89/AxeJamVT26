@@ -3,6 +3,7 @@ using UnityEngine;
 public class Items : MonoBehaviour
 {
     [SerializeField] SpinScript spinScript;
+    private int index;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -17,6 +18,6 @@ public class Items : MonoBehaviour
     private void Awake()
     {
         spinScript = GameObject.Find("SpinLogic").GetComponent<SpinScript>();
-        spinScript.AddIcon(gameObject); 
+        index = spinScript.AddIcon(gameObject); 
     }
 }
