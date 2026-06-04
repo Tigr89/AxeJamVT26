@@ -3553,6 +3553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03fab69dc0699b4409e1d514bc9bc959, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMaxHealth: 36
   playerHealth: 36
   playerDamage: 0
   playerArmour: 0
@@ -3777,21 +3778,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3567025895453563059, guid: fd2234ee74d17054fae808ac8e50b8da, type: 3}
-      propertyPath: startCombat
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4340986388088687521, guid: fd2234ee74d17054fae808ac8e50b8da, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 600418337}
+    - target: {fileID: 5879542244787960413, guid: fd2234ee74d17054fae808ac8e50b8da, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6794895644175616670, guid: fd2234ee74d17054fae808ac8e50b8da, type: 3}
       propertyPath: m_Name
       value: CombatUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 6868304746370140664, guid: fd2234ee74d17054fae808ac8e50b8da, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

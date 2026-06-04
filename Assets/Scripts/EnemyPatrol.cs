@@ -9,7 +9,7 @@ public class EnemyPatrol : MonoBehaviour
     [SerializeField] float speed = 2f;
     [SerializeField] float waitTime = 5f;
     [SerializeField] SpinScript spinScript;
-    private string ObjectID;
+    
 
     Transform[] waypoints;
     List<Vector2> path;
@@ -27,6 +27,8 @@ public class EnemyPatrol : MonoBehaviour
         waypoints = new Transform[count];
         for (int i = 0; i < count; i++)
             waypoints[i] = patrolPoints.GetChild(i);
+
+        
     }
 
     void Start()

@@ -3,7 +3,8 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     public static PlayerStats main;
-    [SerializeField] private int playerHealth;
+    public int playerMaxHealth;
+    public int playerHealth;
     public int playerDamage;
     public int playerArmour;
 
