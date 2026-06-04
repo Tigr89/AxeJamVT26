@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class SpinScript : MonoBehaviour
 {
     public List<GameObject> iconList;
+    public static SpinScript main;
 
     [SerializeField] int distanceBetweenIcons;
     [SerializeField] RectTransform rectTransform;
@@ -22,6 +23,9 @@ public class SpinScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
+        if (main == null) main = this;
+        else Destroy(gameObject);
+
         rectTransform = GetComponent<RectTransform>();
 
         

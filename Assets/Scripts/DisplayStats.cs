@@ -1,10 +1,15 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DisplayStats : MonoBehaviour
 {
-    string[] info;
-    public TMP_Text textBox;
+    public int health;
+    public int damage;
+    public int armour;
+    [SerializeField] Sprite[] shieldSprites;
+    [SerializeField] private Image shieldImage;
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -15,9 +20,11 @@ public class DisplayStats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for(int i = 0; i < info.Length; i++)
+        if (armour > 0)
         {
-            textBox.text += info[i] + "\n\n" ;
+            if (armour < shieldSprites.Length) shieldImage.sprite = shieldSprites[armour];
         }
+        else shieldImage.sprite = shieldSprites[0];
+
     }
 }
