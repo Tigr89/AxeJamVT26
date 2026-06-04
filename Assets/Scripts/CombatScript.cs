@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class CombatScript : MonoBehaviour
 {
+    public static CombatScript main;
+
     [SerializeField] bool diceRolling;
     public float diceSpeed = 0.1f;
 
@@ -12,11 +14,15 @@ public class CombatScript : MonoBehaviour
 
     public GameObject attackTarget;
 
+    public bool inCombat;
+    [SerializeField] private bool startCombat; //this bool is used just to trigger the coroutine
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        if (main == null) main = this;
+        else Destroy(gameObject);
     }
 
     // Update is called once per frame
@@ -24,7 +30,21 @@ public class CombatScript : MonoBehaviour
     {
         //DEBUG
         if (!diceRolling && Input.GetKeyDown(KeyCode.V)) StartCoroutine(CombatDice());
-        
+
+        if (startCombat)
+        {
+            StartCoroutine(Combat());
+            startCombat = false;
+        }
+
+        if (diceRolling)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                diceRolling = false;
+            }
+        }
+
     }
 
     public IEnumerator CombatDice()
@@ -38,10 +58,43 @@ public class CombatScript : MonoBehaviour
             diceNumber = Random.Range(0, diceSprites.Length);
             diceSR.sprite = diceSprites[diceNumber];
         }
+      
+        yield return null;
+    }
 
-        diceNumber++;
+    public IEnumerator Combat()
+    {
+        inCombat = true;
 
-        if (attackTarget != null) attackTarget.GetComponent<EnemyStats>().UpdateEnemyHealth(-(diceNumber + PlayerStats.main.playerDamage));
+        while(attackTarget != null)
+        {
+            EnemyStats enemyStats = attackTarget.GetComponent<EnemyStats>();
+
+            StartCoroutine(CombatDice());
+            //PLAYER TURN
+            while (diceRolling)
+            {
+                yield return null;
+            }
+            
+            if (attackTarget != null) enemyStats.UpdateEnemyHealth(-(diceNumber + PlayerStats.main.playerDamage));
+            string playerAttackInfo = "You did " + (diceNumber + 1 + PlayerStats.main.playerDamage) + " damage!";
+            Debug.Log(playerAttackInfo);
+
+            //Kolla om fienden lever
+            if (attackTarget == null) break;
+
+            //ENEMY TURN
+            int enemyDMG = Random.Range(enemyStats.minDMG, enemyStats.maxDMG);
+            PlayerStats.main.UpdatePlayerHealth(enemyDMG);
+            string enemyAttackInfo = enemyStats.gameObject.name + " did " + enemyDMG + " damage!";
+
+            Debug.Log(enemyAttackInfo);
+
+            yield return new WaitForSeconds(3);
+        }
+
+        inCombat = false;
 
         yield return null;
     }
