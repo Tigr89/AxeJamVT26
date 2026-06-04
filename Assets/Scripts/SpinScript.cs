@@ -30,10 +30,10 @@ public class SpinScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!CombatScript.main.inCombat)
-        {
-            SpinLogic();
-        }
+        if (CombatScript.main.inCombat) return;
+        
+        SpinLogic();
+        
     }
 
     private void SpinLogic()
@@ -105,13 +105,15 @@ public class SpinScript : MonoBehaviour
         UpdateIconList();
     }
 
-    public void AddIcon(GameObject itemToAdd)
+    public int AddIcon(GameObject itemToAdd)
     {
         GameObject instance = Instantiate(iconPlaceholder, transform, false);
         instance.GetComponent<Image>().sprite = itemToAdd.GetComponent<SpriteRenderer>().sprite;
         instance.GetComponent<ItemSymbol>().targetPosition = itemToAdd.transform;
         iconList.Add(instance);
         UpdateIconList();
+
+        return iconList.Count - 1;
     }
 
     public void UpdateIconList()
