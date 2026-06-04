@@ -564,7 +564,7 @@ MonoBehaviour:
   - {fileID: 3585615014435213555, guid: 0ba573f43b9dacc4e8d3cb0b54b4ae00, type: 3}
   attackTarget: {fileID: 0}
   inCombat: 0
-  startCombat: 1
+  startCombat: 0
   playerText: {fileID: 8076631328212347632}
   enemyText: {fileID: 2998335562211763472}
 --- !u!223 &4340986388088687521
