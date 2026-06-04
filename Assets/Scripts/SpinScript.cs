@@ -13,10 +13,12 @@ public class SpinScript : MonoBehaviour
 
     public float wheelOffset;
     public float spinSpeed;
+    public float spinPercentageIncrease = 1;
 
     public bool isSpinning;
 
     private float startPos;
+
 
     [SerializeField] GameObject iconPlaceholder;
 
@@ -169,6 +171,7 @@ public class SpinScript : MonoBehaviour
         wheelOffset = 0; //Beh�vs nog inte men k�nns b�ttre eftersom detta v�rde annars blir v�ldigt stort.
         targetIcon = null;
         isSpinning = true;
+        spinSpeed = spinSpeed * spinPercentageIncrease;
     }
 
     public void StopSpin()
