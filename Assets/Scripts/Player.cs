@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
 
     void FollowPath()
     {
+        if (CombatScript.main.inCombat != false) return;
         if (path == null || pathIndex >= path.Count) return;
 
         transform.position = Vector2.MoveTowards(transform.position, path[pathIndex], speed * Time.deltaTime);
