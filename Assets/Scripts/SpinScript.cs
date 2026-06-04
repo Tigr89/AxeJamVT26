@@ -153,6 +153,15 @@ public class SpinScript : MonoBehaviour
             addedDistance = new Vector2(addedDistance.x + distanceBetweenIcons, addedDistance.y);
             iconList.Add(child.gameObject);
         }
+
+        //Shuffle list
+        for (int i = iconList.Count - 1; i > 0; i--)
+        {
+            int randomIndex = Random.Range(0, i + 1);
+            GameObject temp = iconList[i];
+            iconList[i] = iconList[randomIndex];
+            iconList[randomIndex] = temp;
+        }
     }
 
     public void StartSpin()

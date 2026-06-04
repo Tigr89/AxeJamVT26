@@ -19,7 +19,6 @@ public class EnemyPatrol : MonoBehaviour
     void Awake()
     {
         spinScript = GameObject.Find("SpinLogic").GetComponent<SpinScript>();
-        ObjectID = spinScript.AddIcon(gameObject);
         if (patrolPoints == null)
             patrolPoints = GameObject.Find("PatrolPoints").transform;
 
