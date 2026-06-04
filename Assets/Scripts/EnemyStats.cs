@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class EnemyStats : MonoBehaviour
@@ -5,11 +6,12 @@ public class EnemyStats : MonoBehaviour
     public int enemyHealth;
     public int maxDMG = 6;
     public int minDMG = 1;
+    private string objectID;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        objectID = SpinScript.main.AddIcon(gameObject);
     }
 
     // Update is called once per frame
@@ -24,6 +26,8 @@ public class EnemyStats : MonoBehaviour
 
         if (enemyHealth <= 0)
         {
+            SpinScript.main.RemoveIcon(objectID);
+
             Destroy(gameObject);
         }
     }

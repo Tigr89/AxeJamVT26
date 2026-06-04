@@ -94,7 +94,7 @@ public class CombatScript : MonoBehaviour
 
             //ENEMY TURN
             int enemyDMG = Random.Range(enemyStats.minDMG, enemyStats.maxDMG) - PlayerStats.main.playerArmour;
-            PlayerStats.main.UpdatePlayerHealth(enemyDMG);
+            PlayerStats.main.UpdatePlayerHealth(-enemyDMG);
             string enemyAttackInfo = enemyStats.gameObject.name + " did " + enemyDMG + " damage!";
             if (enemyText != null) enemyText.text = enemyAttackInfo;
 
