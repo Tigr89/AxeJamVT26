@@ -1,7 +1,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class SpinScript : MonoBehaviour
 {
     public List<GameObject> iconList;
@@ -15,6 +15,8 @@ public class SpinScript : MonoBehaviour
     public bool isSpinning;
 
     private float startPos;
+
+    [SerializeField] GameObject iconPlaceholder;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -74,7 +76,7 @@ public class SpinScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R)) UpdateIconList();
 
-        if (Input.GetKeyDown(KeyCode.T)) RemoveIcon(2);
+        if (Input.GetKeyDown(KeyCode.T)) RemoveIcon(0);
 
         if (Input.GetKeyDown(KeyCode.Space)) StopSpin();
     }
@@ -93,7 +95,8 @@ public class SpinScript : MonoBehaviour
 
     public void AddIcon(GameObject itemToAdd)
     {
-        GameObject instance = Instantiate(itemToAdd, transform, false);
+        GameObject instance = Instantiate(iconPlaceholder, transform, false);
+        instance.GetComponent<Image>().sprite = itemToAdd.GetComponent<SpriteRenderer>().sprite;
         iconList.Add(instance);
         UpdateIconList();
     }
