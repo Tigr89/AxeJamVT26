@@ -9,6 +9,10 @@ public class DisplayStats : MonoBehaviour
     public int armour;
     [SerializeField] Sprite[] shieldSprites;
     [SerializeField] private Image shieldImage;
+
+    [SerializeField] Sprite[] swordRank;
+    [SerializeField] private Image swordImage;
+
     [SerializeField] private Image HPBar;
     public EnemyStats enemyInstance;
 
@@ -32,12 +36,14 @@ public class DisplayStats : MonoBehaviour
             maxHP = PlayerStats.main.playerMaxHealth;
             currentHP = PlayerStats.main.playerHealth;
             armour = PlayerStats.main.playerArmour;
+            damage = PlayerStats.main.playerDamage;
         }
         else
         {
             currentHP = enemyInstance.enemyHealth;
             armour = enemyInstance.enemyArmour;
             maxHP = enemyInstance.enemyMaxHealth;
+            
         }
 
         //UPDATE ARMOUR
@@ -49,6 +55,16 @@ public class DisplayStats : MonoBehaviour
         {
             shieldImage.sprite = shieldSprites[0];
             shieldImage.color = Color.grey;
+        }
+
+        if(damage > 0)
+        {
+            if (damage < swordRank.Length) swordImage.sprite = swordRank[damage];
+        }
+        else
+        {
+            if (swordRank.Length > 0) swordImage.sprite = swordRank[0];
+            swordImage.color = Color.grey;
         }
 
         Debug.Log("maxHP: " + maxHP + " currentHP: " + currentHP + " fillAmount: " + (currentHP / maxHP));
