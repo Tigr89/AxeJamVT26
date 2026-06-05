@@ -16,7 +16,7 @@ public class DisplayStats : MonoBehaviour
     [SerializeField] private Image HPBar;
     public EnemyStats enemyInstance;
 
-    
+    public bool isPlayer; //Quickfix
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -67,9 +67,9 @@ public class DisplayStats : MonoBehaviour
             swordImage.color = Color.grey;
         }
 
-        Debug.Log("maxHP: " + maxHP + " currentHP: " + currentHP + " fillAmount: " + (currentHP / maxHP));
-        //UPDATE HEALTH
-        HPBar.fillAmount = currentHP / maxHP;
+        if(currentHP > 0 && enemyInstance != null && !isPlayer) HPBar.fillAmount = currentHP / maxHP;
+        else if(isPlayer) HPBar.fillAmount = currentHP / maxHP;
+        else HPBar.fillAmount = 0;
 
     }
 }

@@ -26,8 +26,8 @@ public class CombatScript : MonoBehaviour
 
     [SerializeField] private DisplayStats enemyInformationContainer;
 
-    private TMP_Text playerHPText;
-    private TMP_Text enemyHPText;
+   // private TMP_Text playerHPText;
+   // private TMP_Text enemyHPText;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -44,8 +44,8 @@ public class CombatScript : MonoBehaviour
     {
         if (inCombat)
         {
-            if (playerHPText != null) playerHPText.text = PlayerStats.main.playerHealth.ToString();
-            if (enemyHPText != null && attackTarget != null) enemyHPText.text = attackTarget.GetComponent<EnemyStats>().enemyHealth.ToString();
+            //if (playerHPText != null) playerHPText.text = PlayerStats.main.playerHealth.ToString();
+            //if (enemyHPText != null && attackTarget != null) enemyHPText.text = attackTarget.GetComponent<EnemyStats>().enemyHealth.ToString();
         }
 
         //DEBUG
@@ -85,8 +85,8 @@ public class CombatScript : MonoBehaviour
         inCombat = true;
         combatContainer.SetActive(true);
 
-        playerHPText = GameObject.Find("PHp").GetComponent<TMP_Text>();
-        enemyHPText = GameObject.Find("EHp").GetComponent<TMP_Text>();
+        //playerHPText = GameObject.Find("PHp").GetComponent<TMP_Text>();
+        //enemyHPText = GameObject.Find("EHp").GetComponent<TMP_Text>();
 
         EnemyStats enemyStats = attackTarget.GetComponent<EnemyStats>();
         enemyStats.ScaleToPlayer();
@@ -122,9 +122,10 @@ public class CombatScript : MonoBehaviour
 
             Debug.Log(enemyAttackInfo);
 
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(3);
         }
 
+        enemyText.text = gameObject.name + " is defeated!";
 
         yield return new WaitForSeconds(3);
 

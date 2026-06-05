@@ -22,7 +22,7 @@ public class EnemyStats : MonoBehaviour
 
     void Start()
     {
-        enemyMaxHealth = enemyHealth;
+        //enemyMaxHealth = enemyHealth;
         objectID = SpinScript.main.AddIcon(gameObject);
     }
 
@@ -36,6 +36,7 @@ public class EnemyStats : MonoBehaviour
         int level = PlayerStats.main.playerLevel;
         int multiplier = isBoss ? 2 : 1;
         enemyHealth = (baseHealth + level * 3) * multiplier;
+        enemyMaxHealth = enemyHealth;
         maxDMG = (baseMaxDMG + level) * multiplier;
         minDMG = (baseMinDMG + level) * multiplier;
     }
