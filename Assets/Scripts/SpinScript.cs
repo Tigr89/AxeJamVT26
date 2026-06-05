@@ -18,7 +18,7 @@ public class SpinScript : MonoBehaviour
     public bool isSpinning;
 
     private float startPos;
-
+    private Player player;
 
     [SerializeField] GameObject iconPlaceholder;
 
@@ -29,6 +29,7 @@ public class SpinScript : MonoBehaviour
         else Destroy(gameObject);
 
         rectTransform = GetComponent<RectTransform>();
+        player = GameObject.Find("Player").GetComponent<Player>();
 
         
     }
@@ -102,7 +103,7 @@ public class SpinScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (isSpinning) StopSpin();
-            else StartSpin();
+            else if (player.ReachedTarget) StartSpin();
         }
     }
     

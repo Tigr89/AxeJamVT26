@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class PlayerStats : MonoBehaviour
     public int playerHealth;
     public int playerDamage;
     public int playerArmour;
+    public int playerLevel = 1;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -27,8 +29,15 @@ public class PlayerStats : MonoBehaviour
 
         if(playerHealth <= 0)
         {
-            Debug.Log("Game Over!");
+            SceneManager.LoadScene("GameOver");
         }
         if (playerHealth > playerMaxHealth) playerHealth = playerMaxHealth;
+    }
+
+    public void LevelUp()
+    {
+        playerLevel++;
+        playerDamage++;
+        Debug.Log("Level up! Nu är spelaren level " + playerLevel);
     }
 }
